@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void)
+{
+    // a, b, c, j, k 정의
+    int a, b, c;
+    int j, k;
+
+    // a, b, c Input 받기 
+    printf("a, b, c Input : ");
+    scanf("%d %d %d", &a, &b, &c);
+
+    // 배열 3개짜리 ptr 생성
+    void **ptr[3];
+
+    // int part
+    ptr[0] = malloc(sizeof(int*) * a); // ptr[0]안에 a 크기의 배열 생성
+    int int_count = 1;
+    for (j = 0; j < a; j++){
+        ptr[0][j] = malloc(sizeof(int) * b); // ptr[0][j]안에 b 크기의 배열 생성
+        for (k = 0; k < b; k++)
+            *((int*)ptr[0][j] + k) = int_count ++; // 값 채워넣기
+    }
+
+    // float part
+    ptr[1] = malloc(sizeof(float*) * b); //ptr[1]안에 b 크기의 배열 생성
+    float float_count = 1.0;
+    for (j = 0; j < b; j++){
+        ptr[1][j] = malloc(sizeof(float) * c); //ptr[1][j]안에 c 크기의 배열 생성
+        for (k = 0; k < c; k++){
+            *((float*)ptr[1][j] + k) = float_count; //float_count 값 채워넣기
+            float_count += 0.1f; //float_count는 매 반복마다 0.1씩 더해져야함
+        }
+    }
+
+    // char part
+    ptr[2] = malloc(sizeof(char***) * c); //ptr[2]안에 c 크기의 배열 생성
+    int char_count = 1; 
+    for (j = 0; j < c; j++){
+        ptr[2][j] = malloc(sizeof(char**) * a); //ptr[2][j]안에 a 크기의 배열 생성
+        for (k = 0; k < a; k++){
+            ((char***)ptr[2])[j][k] = malloc(sizeof(char) * 5); //ptr[2]가 3차원 포인트이고, 그 안에 [j][k]까지 내려간 1차원 포인트 안에 5개를 할당
+            sprintf(((char***)ptr[2])[j][k], "hi%d", char_count++); //값 채워넣기
+        }
+    }
+
+    // int output
+    for (j = 0; j < a; j++){
+        for (k = 0; k < b; k++){
+            printf("%d", *((int*)ptr[0][j] + k));
+            printf("%s", " "); //띄어쓰기
+        }
+        printf("\n"); //줄바꿈
+    }
+
+    //float output
+    for (j = 0; j < b; j++){
+        for (k = 0; k < c; k++){
+            printf("%.1f", *((float*)ptr[1][j] + k));
+            printf("%s", " ");
+        }
+        printf("\n");
+    }
+
+    //char output
+    for (j = 0; j < c; j++){
+        for (k = 0; k < a; k++){
+            printf("%s", *((char**)ptr[2][j] + k));
+            printf("%s", " ");
+        }
+        printf("\n");
+    }
+}
