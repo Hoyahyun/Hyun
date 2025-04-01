@@ -1,1 +1,19 @@
+N = int(input())
 
+array = []
+
+for _ in range (N):
+    word = input()
+    array.append(word)
+
+# 중복 제거
+array = list(set(array))
+
+# 사전 순 정렬
+array.sort()
+
+# 길이별 정렬
+array.sort(key=len)
+
+for i in range (len(array)):
+    print(array[i])
