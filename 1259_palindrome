@@ -1,1 +1,20 @@
+palindrome = []
 
+#0이 입력되기 전까지 계속해서 입력 받고, palindrome에 저장
+while True:
+    num = int(input())
+    if num == 0:
+        break
+    palindrome.append(num)
+    
+# 앞과 뒤의 숫자가 다르다면 count를 올리고 no 출력, 같다면 count는 0을 유지하고 yes 출력
+for i in range (len(palindrome)):
+    count = 0
+    for j in range (int(len(str(palindrome[i]))/2)+1):
+        if str(palindrome[i])[j] != str(palindrome[i])[-j-1]:                
+            count += 1
+    if count == 0:
+        palindrome[i] = "yes"
+    else:
+        palindrome[i] = "no"
+    print(palindrome[i])
