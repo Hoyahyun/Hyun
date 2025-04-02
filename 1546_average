@@ -1,0 +1,34 @@
+# 입력 받기
+N = int(input())
+
+# 새로운 거짓 테스트 결과 저장 리스트
+New_Test = []
+
+# 함수 이용해서, 평균 구하기
+def avg(data):
+    return sum(data) / len(data) * 100
+
+# 띄어쓰기 기준으로 입력값 받기
+Test = input().split()
+
+# 실제 테스트 결과의 최대값
+Max_score = max(map(int, Test))
+
+# 새로운 결과로 바꾸기
+for i in range(N):
+    New_Test.append(int(Test[i]) / Max_score)
+
+print(avg(New_Test))
+
+# 코드 길이 자체를 줄이는 풀이
+
+N = int(input())
+
+New_Test = []
+
+Max_score = max(map(int, input().split()))
+
+for i in range(N):
+    New_Test.append(int(Test[i]) / Max_score)
+
+print(sum(New_Test) / len(New_Test) * 100)
