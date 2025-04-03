@@ -1,0 +1,7 @@
+N = int(input())
+
+Loc = [list(map(int, input().split())) for i in range (N)]
+Loc.sort()
+
+for i in Loc:
+    print(*i)
