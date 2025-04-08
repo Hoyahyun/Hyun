@@ -1,0 +1,11 @@
+import math
+
+N = int(input())
+
+# 1 예외 처리
+if N == 1:
+    print(1)
+
+# 2 이상일 때
+else:
+    print((N - 2 ** (int(math.log2(N-1)) ))*2)
