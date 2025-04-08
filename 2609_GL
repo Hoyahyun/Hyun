@@ -1,0 +1,23 @@
+# 입력 받기
+N, M = map(int, input().split())
+
+# 최대 공약수 찾기 (유클리드 호제법 사용)
+def gcd_f (N, M):
+    if M > N :
+        N, M = M, N # N이 더 큰 수, M이 더 작은 수
+    while M != 0:
+        if M == 0 :
+            return N # M이 0이면 N 반환
+        if N % M == 0:
+            return M # 나눠지면 M이 최대 공약수
+        else:
+            N, M = M, N%M
+
+# 최대 공약수
+gcd = gcd_f(N, M)
+
+# 최소 공배수 = 두 수의 곱에서 최대 공약수를 나눈 값
+lcm = int(N * M / gcd)
+
+print(gcd)
+print(lcm)
